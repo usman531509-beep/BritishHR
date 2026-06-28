@@ -20,7 +20,7 @@ export function CTA() {
           <h2 className="text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
             Run UK HR,
             <br />
-            <span className="text-gradient">the compliant way.</span>
+            <span className="text-foreground">the compliant way.</span>
           </h2>
           <p className="mt-5 max-w-xl text-pretty text-foreground/65">
             Get the entire CompliHR platform free for 14 days. No credit card, UK-hosted and GDPR-compliant.

@@ -103,3 +103,33 @@ deployment URL and sign in.
 - **Auth.js** — `trustHost: true` so it works behind Vercel's proxy.
 - **Region** — for lowest latency set the Vercel Function region (Project →
   Settings → Functions) to the same region as your database.
+
+---
+
+## Performance / fast routing
+
+If the app feels slow **only on Vercel** (but fast locally), it's network distance
+to the database — every page is server-rendered and queries Postgres per request.
+
+1. **Match regions (biggest win).** Find your Neon region in the Neon console (or
+   the host in the connection string, e.g. `...us-east-2.aws.neon.tech` →
+   `us-east-2`). Then in Vercel → **Settings → Functions → Function Region**, pick
+   the matching one:
+   | Neon region        | Vercel region |
+   | ------------------ | ------------- |
+   | aws us-east-1/2    | `iad1` / `cle1` |
+   | aws eu-central-1   | `fra1`        |
+   | aws eu-west-2      | `lhr1` (London) |
+   Redeploy after changing. Cross-region (e.g. US function ↔ EU DB) adds ~100ms to
+   *every* query and is the usual cause of slow navigation.
+
+2. **Use the POOLED `DATABASE_URL`** (the Neon integration sets this correctly —
+   the host contains `-pooler`). The direct URL is only for migrations.
+
+3. **Instant navigation** — `loading.tsx` skeletons are in place for every portal
+   area, so clicking a link shows an immediate skeleton instead of freezing on the
+   old page while the server renders.
+
+4. **Neon free tier autosuspends** after ~5 min idle, so the *first* request after
+   a quiet period is slow (~0.5–1s while the DB wakes), then fast again. Upgrading
+   Neon (or a keep-warm ping) removes this; it's a free-tier trait, not a bug.

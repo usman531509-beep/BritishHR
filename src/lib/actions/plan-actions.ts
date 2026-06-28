@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { prisma } from "@/lib/db/prisma";
 import { platformAction } from "@/lib/actions/guard";
 import { poundsToPence } from "@/lib/validation/uk";
@@ -42,6 +42,7 @@ export const savePlan = platformAction(
       id = created.id;
     }
 
+    revalidateTag("plans", "max"); // refresh the cached public pricing
     revalidatePath("/owner/plans");
     revalidatePath("/"); // public pricing reflects changes immediately
     return { id };
@@ -60,6 +61,7 @@ export const deletePlan = platformAction(
       throw new Error("This plan has active subscriptions — hide it instead of deleting.");
     }
     await prisma.plan.delete({ where: { id: input.id } });
+    revalidateTag("plans", "max"); // refresh the cached public pricing
     revalidatePath("/owner/plans");
     revalidatePath("/");
     return { id: input.id };

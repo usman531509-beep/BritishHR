@@ -168,7 +168,7 @@ function FlowDiagram() {
     [3, 4],
   ];
   return (
-    <div className="relative h-44 w-full overflow-hidden dark-island rounded-2xl border border-white/10 bg-black/30">
+    <div className="relative h-44 w-full overflow-hidden dark-island rounded-2xl border border-white/10 bg-zinc-950">
       <div className="absolute inset-0 grid-bg opacity-50" />
       <svg
         viewBox="0 0 100 100"
@@ -259,7 +259,7 @@ function RegionMap() {
     [50, 52],
   ];
   return (
-    <div className="relative mt-5 h-40 w-full overflow-hidden dark-island rounded-2xl border border-white/10 bg-black/30">
+    <div className="relative mt-5 h-40 w-full overflow-hidden dark-island rounded-2xl border border-white/10 bg-zinc-950">
       <div className="absolute inset-0 grid-bg opacity-40" />
       <svg viewBox="0 0 100 80" className="absolute inset-0 h-full w-full">
         {dots.map(([x, y], i) => (
