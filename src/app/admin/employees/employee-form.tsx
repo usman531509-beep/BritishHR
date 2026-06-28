@@ -117,7 +117,7 @@ export function EmployeeForm({
             <Input name="dob" type="date" defaultValue={defaults.dob} />
           </Field>
           <Field label="National Insurance no." error={err("niNumber")}>
-            <Input name="niNumber" placeholder="QQ123456C" defaultValue={defaults.niNumber} />
+            <Input name="niNumber" placeholder="AB123456C" defaultValue={defaults.niNumber} />
           </Field>
         </CardBody>
       </Card>

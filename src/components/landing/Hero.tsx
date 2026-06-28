@@ -47,7 +47,7 @@ export function Hero() {
               className="animate-fade-up text-balance text-[40px] font-semibold leading-[1.02] tracking-tight text-foreground sm:text-6xl md:text-7xl"
               style={{ animationDelay: "120ms" }}
             >
-              <span className="text-foreground">The HR platform for</span>
+              <span className="text-violet-500">The HR platform for</span>
               <span className="relative mt-2 flex h-[1.15em] w-full justify-center overflow-hidden text-center md:mt-3">
                 &nbsp;
                 {titles.map((title, index) => (
