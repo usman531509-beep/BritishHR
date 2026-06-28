@@ -1,0 +1,23 @@
+# Local PostgreSQL for development (mirrors Supabase Postgres).
+# Usage: docker compose up -d   then   npm run db:migrate && npm run db:seed
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: complihr-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: complihr
+      POSTGRES_PASSWORD: complihr
+      POSTGRES_DB: complihr
+    ports:
+      - "5432:5432"
+    volumes:
+      - complihr_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U complihr"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  complihr_pgdata:
